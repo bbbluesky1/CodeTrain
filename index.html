@@ -1,0 +1,200 @@
+<html lang="ja">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+        <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    </head>
+    <body>
+        <header>
+            <p>CodeTrain</p>
+        </header>
+        <div class="box1">
+            <select id="quest_select" class="select_box" py-change="get_question(),input_line()">
+            </select>
+            <p class="mondaibun" id="mondaibun"></p>
+            <div class="editor_parent">
+                <div class="editor_numbers" id="editor_numbers"></div>
+                <textarea id="editor_input" rows="10000" class="editor_input"></textarea>
+            </div>
+            <input type="button" value="実行" py-click="delete_output(),execute()">
+            <p class="output" id="output">実行結果：<br></p>
+        </div>
+        <py-script>
+            from js import txt_to_code, addOption, exe_before_check
+            from pyodide.http import open_url
+            import random
+            import json
+            url = "https://ryoichi2003910.github.io/CodeTrain/data.json"
+            data = json.loads(open_url(url).read())
+            for key in data['questions']:
+                addOption(key['id'])
+            
+            a = 0
+            def input_line():
+                global a
+                rand_n = random.randint(data["questions"][int(Element("quest_select").element.value)-1]["min"], data["questions"][int(Element("quest_select").element.value)-1]["max"])
+                Element("editor_input").element.innerText = "input_line = " + str(rand_n)
+                a = rand_n
+
+            def get_question():
+                selectbox = Element("quest_select")
+                list_search = [ item for item in data["questions"] if item["id"] == int(selectbox.element.value) ]
+                mondaibun = Element("mondaibun")
+                mondaibun.element.innerText = list_search[0]["question"]
+
+            def output(n):
+                output = Element("output");
+                output.element.innerHTML += str(n) + "<br>"
+                algorithm = data["questions"][int(Element("quest_select").element.value)-1]["algorithm"]
+                e = eval(algorithm)
+                print(e)
+                if n == e:
+                    output.element.innerHTML += "正解<br>"
+                else:
+                    output.element.innerHTML += "不正解<br>"
+
+            def execute():
+                ev = txt_to_code()
+                exec(exe_before_check(ev))
+            
+            def delete_output():
+                output = Element("output");
+                output.element.innerHTML = "実行結果：<br>"
+
+            get_question()
+            input_line()
+
+        </py-script>
+        <style>
+            body{
+                margin:0;
+                padding:0;
+                background-color: rgb(255, 235, 198);
+            }
+            header{
+                width:100%;
+                padding:2px;
+                text-align: center;
+                background-color: whitesmoke;
+                box-shadow: 0px 10px 10px -6px rgba(0, 0, 0, 0.3);
+            }
+            .box1{
+                width: 80%;
+                margin: 0 auto;
+                padding:5%;
+                word-break: break-all;
+            }
+            .box1 select{
+                width:80%;
+                display: block;
+                margin: 2% auto;
+                text-align: center;
+            }
+            .mondaibun{
+                width:80%;
+                margin: 2% auto;
+                text-align: center;
+            }
+            .editor_parent{
+                width:100%;
+                height:50vh;
+                position:relative;
+                overflow: scroll;
+            }
+            .editor_numbers{
+                width:5%;
+                min-height:100%;
+                background-color: rgb(54, 49, 49);
+                position:absolute;
+                top:0;
+                left:0;
+            }
+            .editor_numbers p{
+                margin:0;
+                padding:0;
+                color: white;
+                font-size: 15px;
+                line-height: 1.5;
+                text-align: center;
+            }
+            .editor_input{
+                width:95%;
+                min-height:100%;
+                background-color: rgb(54, 49, 49);
+                position:absolute;
+                top:0;
+                left:5%;
+                font-size: 15px;
+                line-height: 1.5;
+                color: white;
+                margin:0;
+                padding:0;
+                caret-color: white;
+            }
+            .editor_input:focus {
+                outline: none;
+            } 
+            .editor_parent::-webkit-scrollbar{
+                display: none;
+            }
+            .editor_input::selection {
+                background-color: rgba(93, 186, 223, 0.664);
+            }
+
+        </style>
+        <script>
+            for (let i = 0; i < 10000; i++) {
+                let textbox_element = document.getElementById('editor_numbers');
+                let new_element = document.createElement('p');
+                new_element.textContent = i;
+                textbox_element.appendChild(new_element);
+            };
+
+            var editor = document.getElementById("editor_input");
+
+            editor.addEventListener("keyup",(e)=>{
+                var ev = editor.value;
+                if(e.keyCode != "8" && ev.slice(ev.length-1,ev.length) == "\n"){
+                    var a = ev.lastIndexOf("\n",ev.length-2);
+                    if (a != -1 && ev.slice(a+1,a+2) == "\t"){
+                        editor.value = ev + "\t"
+                    }
+                    else if(ev.slice(ev.length-2,ev.length-1) == ":"){
+                    editor.value = ev + "\t";
+                    }
+                }
+            });
+
+            function txt_to_code(){
+                var ev = editor.value;
+                for (let i = 0; i < ev.length; i++){
+                        ev.slice(i,i+1).replace("\n",";");
+                        ev.slice(i,i+1).replace("\t",";");
+                }
+                return ev += ";";
+            }
+
+            function addOption(n) {
+                var select = document.getElementById("quest_select");
+                var option = document.createElement("option");
+                option.text = n;
+                option.value = n;
+                select.appendChild(option);
+            }
+
+            function exe_before_check(ev){
+                for (let i = 0; i < ev.length; i++){
+                        if (ev.slice(i,i+5) == "print"){
+                            var a = ev.slice(0,i);
+                            var c = "output(";
+                            var d = ev.slice(ev.indexOf("(",i)+1,ev.indexOf(")",i));
+                            var e = ev.slice(ev.indexOf(")",i),ev.length);
+                            ev = a+c+d+e;
+                            
+                        }
+                }
+                return ev;
+            } 
+        </script>
+    </body>
+</html>
