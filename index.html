@@ -47,7 +47,6 @@
                 output.element.innerHTML += str(n) + "<br>"
                 algorithm = data["questions"][int(Element("quest_select").element.value)-1]["algorithm"]
                 e = eval(algorithm)
-                print(e)
                 if n == e:
                     output.element.innerHTML += "正解<br>"
                 else:
@@ -139,6 +138,11 @@
             }
             .editor_input::selection {
                 background-color: rgba(93, 186, 223, 0.664);
+            }
+            body::-webkit-scrollbar{
+                display: none;
+            
+                
             }
 
         </style>
