@@ -2,15 +2,23 @@
   "questions":[
     {
       "id" : 1,
-      "question" : "10円のガムをa個買った時、合計はいくらかもとめなさい。aには１～３０のいずれかの数が入ります。",
-      "algorithm" : "10*a",
+      "title": "奇数か偶数か",
+      "question" : "入力された値が奇数か偶数かを判定するプログラムを書いてください。",
+      "algorithm" :"for i in range(len(n)):\n\tif n[i] % 2 == 0:\n\t\talgoPrint('N is guusuu')\n\telif n[i] % 2 == 1:\n\t\talgoPrint('N is kisuu')",
+      "testcase1" : [4,13,24,55,79],
+      "testcase2" : [6,22,43,32,88,67,90],
+      "input_rei": "4<br>13<br>24<br>55<br>79",
+      "kitai_output": "偶数だった場合[N is guusuu]<br>奇数だった場合[N is kisuu]　と、出力。",
+      "output_rei":"13 is kisuu<br>24 is guusuu<br>55 is kisuu<br>79 is kisuu",
+      "jouken": "T、N は整数<br>1<=N<=100",
       "min" : 1,
-      "max" : 30 
+      "max" : 100 
     },
     { 
       "id" : 2,
-      "question" : "a歳まで生きた人は、合計何秒生きたかもとめなさい。aの値は１～１００です。",
-      "algorithm" : "60*60*24*365*a",
+      "level":"Normal",
+      "question" : "n",
+      "algorithm" : "a*c/2",
       "min" : 1,
       "max" : 100
     }
