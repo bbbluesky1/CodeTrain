@@ -2,7 +2,7 @@
   "questions":[
     {
       "id" : 1,
-      "title": "奇数か偶数か",
+      "title": "奇数・偶数判定",
       "question" : "入力された値が奇数か偶数かを判定するプログラムを書いてください。",
       "algorithm" :"for i in range(len(n)):\n\tif n[i] % 2 == 0:\n\t\talgoPrint('N is guusuu')\n\telif n[i] % 2 == 1:\n\t\talgoPrint('N is kisuu')",
       "testcase1" : [4,13,24,55,79],
