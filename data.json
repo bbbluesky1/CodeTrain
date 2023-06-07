@@ -19,7 +19,8 @@
       "input":"1行目には、入力される行数Tが入ります。<br>1回のテストケースは、1行に1つずつ整数Nが入っている複数行の標準入力（stdin）による入力になります。",
       "kitai_output": "標準出力（stdout）で、入力された行数分の判定結果を出力します。<br>偶数だった場合[N is guusuu]<br>奇数だった場合[N is kisuu]　と、出力。",
       "output_rei":"N is kisuu<br>N is guusuu<br>N is kisuu<br>N is kisuu",
-      "jouken": "T、N は整数<br>1<=N<=100"
+      "jouken": "T、N は整数<br>1<=N<=100",
+      "rank":"Bronze"
     },
     { 
       "id": 2
