@@ -5,15 +5,21 @@
       "title" : "奇数・偶数判定",
       "question" : "入力された値が奇数か偶数かを判定するプログラムを書いてください。",
       "algorithm" :"for i in range(1,n[0]+1):\n\tif n[i] % 2 == 0:\n\t\talgoPrint('N is guusuu')\n\telif n[i] % 2 == 1:\n\t\talgoPrint('N is kisuu')",
-      "testcase1" : [4,13,24,55,79],
-      "testcase2" : [6,22,43,32,88,67,90],
+      "testcase1" : [4,1,3,47,84],
+      "testcase2" : [6,78,88,44,67,89,47],
+      "testcase3" : [6,19,94,47,33,28,99],
+      "testcase4" : [6,56,11,89,40,55,78],
+      "testcase5" : [5,76,58,89,47,89,43],
+      "testcase6" : [7,43,89,53,23,43,65,76],
+      "testcase7" : [6,88,23,89,33,34,54],
+      "testcase8" : [6,11,65,54,43,99,88],
+      "testcase9" : [6,3,75,43,11,27,76],
+      "testcase10" : [6,22,54,56,34,44,88],
       "input_rei": "4<br>13<br>24<br>55<br>79",
       "input":"1行目には、入力される行数Tが入ります。<br>1回のテストケースは、1行に1つずつ整数Nが入っている複数行の標準入力（stdin）による入力になります。",
       "kitai_output": "標準出力（stdout）で、入力された行数分の判定結果を出力します。<br>偶数だった場合[N is guusuu]<br>奇数だった場合[N is kisuu]　と、出力。",
       "output_rei":"13 is kisuu<br>24 is guusuu<br>55 is kisuu<br>79 is kisuu",
-      "jouken": "T、N は整数<br>1<=N<=100",
-      "min" : 1,
-      "max" : 100 
+      "jouken": "T、N は整数<br>1<=N<=100"
     },
     { 
       "id": 2
