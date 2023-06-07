@@ -21,9 +21,6 @@
       "output_rei":"N is kisuu<br>N is guusuu<br>N is kisuu<br>N is kisuu",
       "jouken": "T、N は整数<br>1<=N<=100",
       "rank":"Bronze"
-    },
-    { 
-      "id": 2
     }
   ]
 }
