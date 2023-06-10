@@ -203,7 +203,9 @@
                 for i in testcase:
                     mess += str(i)+"<br>"
                 Element("mess1").element.innerHTML = mess
-                exec(data["questions"][id-1]["algorithm"])
+                py_file_url = "https://bbbluesky1.github.io/CodeTrain/py_file/" + data["questions"][id-1]["py_file"]
+                answer_code = (open_url(py_file_url).read())
+                exec(answer_code)
                 mess = ""
                 for i in algo_out:
                     mess += str(i) + "<br>"
@@ -255,7 +257,9 @@
                 Element("body").element.style.overflow = "hidden"
                 Element("modal_window").element.style.display = "block"
                 testcase = data["questions"][id-1]["testcase" + str(n)]
-                exec(data["questions"][id-1]["algorithm"])
+                py_file_url = "https://bbbluesky1.github.io/CodeTrain/py_file/" + data["questions"][id-1]["py_file"]
+                answer_code = (open_url(py_file_url).read())
+                exec(answer_code)
                 s_time = time.time()
                 ev = Element("editor_input").element.value
                 try:
