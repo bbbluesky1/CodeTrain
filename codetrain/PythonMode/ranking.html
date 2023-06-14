@@ -1,0 +1,172 @@
+<html lang="ja">
+    <head>
+        <meta charset="utf-8"/>
+    </head>
+    <body id="body">
+        <header>
+            <p class="logo">CodeTrain</p>
+        </header>
+        <div class="center">
+            <span>Top > </span><a href="./index.html" id="a-top">before</a><span> > Here</span>
+            <h1 class="midasi_ranking">Pythonモードーランキング</h1>
+            <table id="table">
+                <tr>
+                    <th>順位</th>
+                    <th>ユーザーネーム</th>
+                    <th>レート</th>
+                </tr>
+            </table>
+        </div>
+        <style>
+            body{
+                margin:0;
+                padding:0;
+                background-color: white;
+            }
+            body::-webkit-scrollbar{
+                display: none;   
+            }
+            header{
+                width:100%;
+                padding:2px;
+                text-align: center;
+                background-color: rgba(250, 183, 83, 0.644);
+                box-shadow: 0px 10px 10px -6px rgba(0, 0, 0, 0.3);
+                font-size: 1.2em;
+                font-weight: 900;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+            }
+            .logo:after{
+                content: "";
+                display: inline-block;
+                width: 25px;
+                height: 25px;
+                background: url(../img/PythonModeLogo.png) no-repeat;
+                background-size: contain;
+                margin-right: 8px;
+                vertical-align: middle;
+            }
+            .center{
+                width: 60%;
+                margin: 0 auto;
+                padding:5%;
+                word-break: break-all;
+            }
+            table{
+                width:100%;
+                padding: 0;
+                border-top:1px solid rgb(204, 204, 204);
+                border-bottom:1px solid rgb(204, 204, 204);
+                border-collapse: collapse;
+                background-color: white;
+                margin: 0;
+            }
+            table tr{
+                height:5vh;
+            }
+            table th{
+                width:33%;
+                height:5vh;
+                border-bottom: 2px solid rgb(182, 181, 181);
+                margin: 0;
+                padding: 0;
+                text-align: center;
+                vertical-align: middle;
+                background-color: rgb(233, 233, 233);
+            }
+            table td{
+                border-bottom: 2px solid rgb(182, 181, 181);
+                margin: 0;
+                padding: 0;
+                text-align: center;
+                vertical-align: middle;
+                height:5vh;
+                width:33%;
+            }
+            table tr:nth-child(odd){
+                background-color: rgb(233, 233, 233);
+            }
+            .midasi_ranking{
+                width:100%;
+                text-align: center;
+            }
+        </style>
+        <script>
+            function getParam(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            var url = "./index.html?username=" + getParam("username"); 
+            document.getElementById("a-top").setAttribute("href",url);
+
+            function table_init(){
+                const table = document.querySelector("table");
+                for (let i = 0; i < 10; i++){
+                    var tr = document.createElement("tr");
+                    for (let i2 = 0; i2 < 3; i2++){
+                        var td = document.createElement("td");
+                        tr.appendChild(td);
+                    }
+                    table.appendChild(tr);
+                }
+            }
+
+            table_init();
+
+        </script>
+        <script type="module">
+            import {app} from '../js/firebase.js';
+            import { getDatabase, ref, set, child, get} from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js';
+
+            var obj = {};
+            var arr;
+
+            function ranking_sort(){
+                const db = getDatabase();
+                const dbRef = ref(getDatabase());
+                get(child(dbRef, `users/`)).then((snapshot) => {
+                  if (snapshot.exists()) {
+                        for (let i = 0; i < Object.keys(snapshot.val()).length; i++){
+                            var name = Object.keys(snapshot.val())[i];
+                            obj[name] = snapshot.val()[name].PythonModeRate;
+                        }
+                        arr = Object.keys(obj).map((e)=>({ key: e, value: obj[e] }));
+                        arr.sort(function(a,b){
+                          if(a.value < b.value) return 1;
+                          if(a.value > b.value) return -1;
+                          return 0;
+                        });
+                        table_input(arr);
+                    }
+                });
+            };
+
+            function table_input(arr){
+                var trs = document.querySelectorAll("tr")
+                for (let i = 0; i < Object.keys(arr).length; i++){
+                    if (!trs[i+1]){
+                        var table = document.querySelector("table");
+                        var tr = document.createElement("tr");
+                        for (let i = 0; i < 3; i++){
+                            var td = document.createElement("td");
+                            tr.appendChild(td);
+                        }
+                        table.appendChild(tr);
+                        trs = document.querySelectorAll("tr");
+                    }
+                    trs[i+1].children[0].innerText= i+1;
+                    trs[i+1].children[1].innerText= arr[Object.keys(arr)[i]].key;
+                    trs[i+1].children[2].innerText= arr[Object.keys(arr)[i]].value;
+                }
+            }
+
+            ranking_sort();
+        </script>
+    </body>
+</html>
