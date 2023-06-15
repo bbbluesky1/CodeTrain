@@ -1,0 +1,224 @@
+<html lang="ja">
+    <head>
+        <meta charset="utf-8"/>
+    </head>
+<body>
+    <div class="box-top">
+        <header> 
+            <p class="header_logo">CodeTrain</p>
+            <div class="header_bottom">
+                <a href="./tutorial_sheet.pdf" download="tutorial_sheet.pdf">チュートリアルシートをダウンロード</a>
+            </div>
+        </header>
+        <p class="impact">NEW PROGRAMING LEARN STYLE</p>
+        <div class="arrow">
+            <p class="arrow_parts1"></p>
+            <p class="arrow_parts2"></p>
+            <p class="arrow_parts3"></p>
+            <p class="arrow_parts4"></p>
+            <p class="arrow_parts5"></p>
+            <p class="arrow_parts6"></p>
+        </div>
+    </div>
+    <div class="center">
+    <a href="./BlockMode/index.html" id="a1">
+        <div class="box">
+            <img src="./img/BlockModeLogo.png" alt="">
+        </div>
+    </a>
+    <a href="./PythonMode/index.html" id="a2">
+        <div class="box">
+            <img src="./img/PythonModeLogo.png" alt="">
+        </div>
+    </a>
+</div>
+<style>
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgba(153, 216, 163, 0.801);
+}
+body::-webkit-scrollbar{
+    display: none;   
+}
+.box-top{
+    width:100vw;
+    height:100vh;
+    background: linear-gradient(to top, rgba(217, 175, 217, 0.7) 0%, rgba(151, 217, 225, 0.7) 100%),url(./img/network-gb44751400_1280.jpg);     
+    background-repeat:  no-repeat;               
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    margin-bottom: 5%;    
+}
+header{
+    width:100vw;
+    height:10vh;
+    background-color: rgba(0, 0, 0, 0.822);
+    margin: 0;
+    padding: 0;
+}
+.header_logo{
+    width:100vw;
+    height:10vh;
+    color: white;
+    line-height: 2;
+    font-size: 2em;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.header_bottom{
+   width:100%;
+   height:4vh;
+   margin: 0;
+   padding: 0;
+   background-color: rgba(255, 255, 255, 0.822);
+   box-shadow: 5px 5px 10px rgba(255, 255, 0, 0.685);
+   text-align: center;
+}
+.header_bottom a{
+    font-size: 2vh;
+    line-height: 2;
+    font-weight: 600;
+}
+.impact{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    font-size: 5em;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+}
+.arrow{
+    width:10vw;
+    height:10vw;
+    margin: 0 auto;
+    background-color: rgba(238, 255, 0, 0.425);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: 5px 5px 10px black;
+}
+.arrow_parts1{
+    width:61%;
+    border-bottom: 10px solid black;
+    transform: rotate(45deg);
+    position: absolute;
+    top:25%;
+    left:0%;
+    margin: 0;
+    padding: 0;
+}
+.arrow_parts2{
+    width:61%;
+    border-bottom: 10px solid black;
+    transform: rotate(-45deg);
+    position: absolute;
+    top:25%;
+    right:0%;
+    margin: 0;
+    padding: 0;
+    
+}
+.arrow_parts3{
+    width:61%;
+    border-bottom: 10px solid black;
+    transform: rotate(45deg);
+    position: absolute;
+    top:50%;
+    left:0%;
+    margin: 0;
+    padding: 0;
+}
+.arrow_parts4{
+    width:61%;
+    border-bottom: 10px solid black;
+    transform: rotate(-45deg);
+    position: absolute;
+    top:50%;
+    right:0%;
+    margin: 0;
+    padding: 0;
+}
+.arrow_parts5{
+    width:61%;
+    border-bottom: 10px solid black;
+    transform: rotate(45deg);
+    position: absolute;
+    top:75%;
+    left:0%;
+    margin: 0;
+    padding: 0;
+}
+.arrow_parts6{
+    width:61%;
+    border-bottom: 10px solid black;
+    transform: rotate(-45deg);
+    position: absolute;
+    top:75%;
+    right:0%;
+    margin: 0;
+    padding: 0;
+}
+.center{
+    width:80%;
+    margin:0 auto;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0;
+}
+.box{
+    width:30%;
+    height:50%;
+    background-color: rgb(174, 121, 224);
+    margin: 5%;
+    padding: 0;
+    display: inline-block;
+    box-shadow: 5px 5px 10px black;
+    position: relative;
+    transition:1s all;
+}
+.box img{
+    width:50%;
+    height:50%;
+    object-fit: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.box:hover{
+    transform:translateY(-4%);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.733);
+
+}
+</style>
+<script>
+    function getParam(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            if (getParam("username") != null){
+                var url1 = "./BlockMode/index.html?username=" + getParam("username"); 
+                document.getElementById("a1").setAttribute("href",url1);
+                var url2 = "./PythonMode/index.html?username=" + getParam("username"); 
+                document.getElementById("a2").setAttribute("href",url2);
+                window.onload = function() {
+                    alert(getParam("username") + "としてログインしています");
+                }
+            }
+</script>
+</body>
+</html>
